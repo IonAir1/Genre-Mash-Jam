@@ -1,0 +1,4 @@
+version 0
+ -created project files
+ - created trello
+ - created git repo
