@@ -34,3 +34,8 @@ func _physics_process(delta):
 		if is_on_floor():
 			velocity.y = jump_speed
 	position.x -= global.speed
+
+
+func _on_detectdead_area_entered(area):
+	queue_free()
+	get_tree().quit()

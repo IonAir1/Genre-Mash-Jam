@@ -1,6 +1,7 @@
 extends Node2D
 
 var platform = preload("res://scenes/Platform.tscn")
+var enemy = preload("res://scenes/enemy.tscn")
 var platy = 680
 
 func platform_spawn():
@@ -27,6 +28,17 @@ func platform_spawn():
 	yield(get_tree().create_timer(time),"timeout")
 	platform_spawn()
 
+
+func enemy_spawn():
+	var e = enemy.instance()
+	e.position.x = 1400
+	e.position.y = randi()%711
+	add_child(e)
+	yield(get_tree().create_timer(rand_range(2, 5)),"timeout")
+	enemy_spawn()
+
+
 func _ready():
 	randomize()
+	enemy_spawn()
 	platform_spawn()

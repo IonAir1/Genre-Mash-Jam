@@ -31,3 +31,11 @@ position = Vector2( 100, 0 )
 position = Vector2( 14.4986, 8.52946 )
 scale = Vector2( 0.0925463, 0.0925463 )
 texture = ExtResource( 3 )
+
+[node name="detectdead" type="Area2D" parent="."]
+collision_layer = 64
+collision_mask = 64
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="detectdead"]
+shape = SubResource( 1 )
+[connection signal="area_entered" from="detectdead" to="." method="_on_detectdead_area_entered"]

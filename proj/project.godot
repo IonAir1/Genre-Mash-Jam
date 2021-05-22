@@ -68,6 +68,7 @@ shoot={
 2d_physics/layer_5="Platform"
 3d_physics/layer_5="Ball"
 2d_physics/layer_6="Ballplayerdetect"
+2d_physics/layer_7="enemybullet"
 
 [rendering]
 
