@@ -19,6 +19,10 @@ config/name="Genre Mash Jam"
 run/main_scene="res://scenes/main.tscn"
 config/icon="res://icon.png"
 
+[autoload]
+
+global="*res://Global/global.gd"
+
 [display]
 
 window/size/width=1280

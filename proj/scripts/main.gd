@@ -28,4 +28,5 @@ func platform_spawn():
 	platform_spawn()
 
 func _ready():
+	randomize()
 	platform_spawn()

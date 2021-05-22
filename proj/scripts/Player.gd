@@ -16,12 +16,14 @@ func get_input():
 		velocity.x -= speed
 	if Input.is_action_just_pressed("shoot"):
 		var p = paper.instance()
-		p.position = position
+		p.position = get_node("rotate/displaced2").global_position
 		p.rotation = $rotate.rotation
 		get_parent().add_child(p)
 
 func _physics_process(delta):
-	$rotate.rotation = (get_global_mouse_position() - $rotate.position).angle()
+	#print($rotate.rotation_degrees)
+	#$rotate.rotation = (get_global_mouse_position() - $rotate.position).angle()
+	$rotate.look_at(get_global_mouse_position())
 	get_input()
 	velocity.y += gravity * delta
 	velocity = move_and_slide(velocity, Vector2.UP)

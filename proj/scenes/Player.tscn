@@ -19,3 +19,9 @@ texture = ExtResource( 1 )
 shape = SubResource( 1 )
 
 [node name="rotate" type="Position2D" parent="."]
+
+[node name="displaced" type="Position2D" parent="rotate"]
+position = Vector2( 10, 0 )
+
+[node name="displaced2" type="Position2D" parent="rotate"]
+position = Vector2( 100, 0 )
