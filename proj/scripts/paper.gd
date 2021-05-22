@@ -7,7 +7,6 @@ func _ready():
 	velocity = get_parent().get_node("Player/rotate/displaced").global_position - get_parent().get_node("Player").global_position
 	velocity.normalized()
 	velocity = velocity*100
-	print(velocity)
 	pass
 
 func _physics_process(delta):
@@ -17,5 +16,6 @@ func _physics_process(delta):
 
 
 func _on_playerdetect_body_entered(body):
+	global.shoot += 1
 	queue_free()
 	pass

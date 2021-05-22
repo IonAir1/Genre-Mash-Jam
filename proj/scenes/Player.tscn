@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://assets/runner.png" type="Texture" id=1]
 [ext_resource path="res://scripts/Player.gd" type="Script" id=2]
+[ext_resource path="res://assets/swimmer.png" type="Texture" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 23.9922, 23.9844 )
@@ -25,3 +26,8 @@ position = Vector2( 10, 0 )
 
 [node name="displaced2" type="Position2D" parent="rotate"]
 position = Vector2( 100, 0 )
+
+[node name="ball" type="Sprite" parent="."]
+position = Vector2( 14.4986, 8.52946 )
+scale = Vector2( 0.0925463, 0.0925463 )
+texture = ExtResource( 3 )
