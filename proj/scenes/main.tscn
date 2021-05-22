@@ -1,22 +1,57 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=1]
-[ext_resource path="res://scenes/Platform.tscn" type="PackedScene" id=2]
+[ext_resource path="res://assets/RobotoMono-VariableFont_wght.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://scripts/main.gd" type="Script" id=3]
+
+[sub_resource type="DynamicFont" id=1]
+size = 64
+font_data = ExtResource( 2 )
 
 [node name="main" type="Node2D"]
 script = ExtResource( 3 )
+__meta__ = {
+"_edit_horizontal_guides_": [ 640.346, 80.1846 ],
+"_edit_vertical_guides_": [ 80.2548, 1199.67 ]
+}
+
+[node name="score" type="Node2D" parent="."]
+position = Vector2( 120, 20 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="score" type="Label" parent="score"]
+margin_right = 380.0
+margin_bottom = 86.0
+custom_fonts/font = SubResource( 1 )
+text = "SCORE: 999"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
 position = Vector2( 1376.66, -107.361 )
 
-[node name="Node2D" type="StaticBody2D" parent="."]
+[node name="ball wall" type="StaticBody2D" parent="."]
 collision_layer = 4
 collision_mask = 2147483648
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Node2D"]
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="ball wall"]
 position = Vector2( -1.5874, 3.1748 )
-polygon = PoolVector2Array( 0.338074, -0.851362, 1280.1, 0.293885, 1279.75, 720.75, -0.671265, 720.457, -0.0741234, 0.582956, -460.413, -6.1748, -455.57, 1063.13, 1725.96, 1069.13, 1713.98, -450.156, 4.5874, -479.175 )
+polygon = PoolVector2Array( 1.58924, 76.8581, 82.0465, -3.11063, 1201.19, -3.25472, 1281.25, 77.0546, 1281.61, 637.173, 1201.26, 716.849, 81.6075, 717.17, 1.72037, 637.446, 1.64359, 77.0161, -10.1, -301.149, -366.482, -295.492, -356.582, 965.986, 1559.68, 971.643, 1544.12, -279.936, -8.80307, -301.024 )
 
-[node name="Platform" parent="." instance=ExtResource( 2 )]
-position = Vector2( 889.892, 300 )
+[node name="killballwall" type="Area2D" parent="."]
+collision_layer = 256
+collision_mask = 2147483648
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="killballwall"]
+position = Vector2( -1.5874, 3.1748 )
+polygon = PoolVector2Array( -103.362, 107.977, 97.0905, -89.8021, 115.799, -228.782, 1482.2, -221.07, 1497.18, 911.65, -294.791, 910.152, -285.526, -278.332, -326.798, -271.983, -342.737, 952.105, 1548.13, 953.603, 1525.65, -258.528, -266.477, -270.395 )
+
+[node name="player wall" type="Area2D" parent="."]
+collision_layer = 128
+collision_mask = 0
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="player wall"]
+polygon = PoolVector2Array( -175.243, -781.035, -175.243, 778.747, 3316.46, 731.844, 3294.58, 781.267, -245.799, 839.223, -245.799, -120.836 )

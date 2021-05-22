@@ -53,10 +53,13 @@ func enemy_spawn():
 		add_child(e)
 	enemy_spawn()
 
+func _process(delta):
+	$score/score.text = "SCORE: " + str(global.score)
 
 func _ready():
 	randomize()
 	global.enemy_count = 0
+	global.score = 0
 	enemy_spawn()
 	platform_spawn()
 	platform_spawn2()

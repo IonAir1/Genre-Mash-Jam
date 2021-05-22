@@ -16,6 +16,10 @@ func _physics_process(delta):
 
 
 func _on_playerdetect_body_entered(body):
+
+	pass
+
+
+func _on_killballdetect_area_entered(area):
 	global.shoot += 1
 	queue_free()
-	pass

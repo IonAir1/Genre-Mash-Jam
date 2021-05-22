@@ -12,7 +12,7 @@ radius = 67.5641
 [node name="paper" type="KinematicBody2D"]
 scale = Vector2( 0.7, 0.7 )
 collision_layer = 8
-collision_mask = 6
+collision_mask = 14
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
@@ -27,4 +27,12 @@ collision_layer = 32
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="playerdetect"]
 shape = SubResource( 2 )
+
+[node name="killballdetect" type="Area2D" parent="."]
+collision_layer = 32
+collision_mask = 256
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="killballdetect"]
+shape = SubResource( 2 )
 [connection signal="body_entered" from="playerdetect" to="." method="_on_playerdetect_body_entered"]
+[connection signal="area_entered" from="killballdetect" to="." method="_on_killballdetect_area_entered"]

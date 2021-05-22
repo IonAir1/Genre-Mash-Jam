@@ -22,10 +22,15 @@ func get_input():
 		global.shoot -= 1
 
 func _physics_process(delta):
-	if global.shoot >= 1:
+	if global.shoot == 1:
+		$ball.visible = true
+		$ball2.visible = false
+	elif global.shoot == 2:
+		$ball2.visible = true
 		$ball.visible = true
 	else:
 		$ball.visible = false
+		$ball2.visible = false
 	$rotate.look_at(get_global_mouse_position())
 	get_input()
 	velocity.y += gravity * delta
