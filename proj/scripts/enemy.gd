@@ -19,6 +19,6 @@ func bullet():
 
 func _on_detect_body_entered(body):
 	yield(get_tree().create_timer(0.01), "timeout")
-	print(body.name)
 	if body.name == "paper":
+		global.enemy_count -= 1
 		queue_free()
