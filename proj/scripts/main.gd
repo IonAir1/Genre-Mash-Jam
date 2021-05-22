@@ -10,22 +10,17 @@ func platform_spawn():
 
 	var p = platform.instance()
 	p.position.x = 1400
-	if platy < 250:
-		platy = platy + rand_range(0, 250)
-	elif platy > 550:
-		platy = platy + rand_range(-250, 0)
-	else:
-		platy = platy + rand_range(-250, 250)
+	platy = rand_range(50, 320)
 	p.position.y = platy
 	add_child(p)
-	if platy < -125:
-		time = rand_range(0.3, 0.8)
-	elif platy < 0:
+	if platy < 0:
 		time = rand_range(0.5, 1)
-	elif platy > 125:
-		time = rand_range(0.7, 1.2)
-	elif platy > 0:
-		time = rand_range(1, 1.5)
+	elif platy >= 0:
+		time = rand_range(0.8, 1.5)
+	#elif platy > 125:
+	#	time = rand_range(0.7, 1.2)
+	#elif platy > 0:
+	#	time = rand_range(1, 1.5)
 	yield(get_tree().create_timer(time),"timeout")
 	platform_spawn()
 
@@ -34,22 +29,17 @@ func platform_spawn2():
 
 	var p = platform.instance()
 	p.position.x = 1400
-	if platy2 < 250:
-		platy2 = platy2 + rand_range(0, 250)
-	elif platy > 550:
-		platy2 = platy2 + rand_range(-250, 0)
-	else:
-		platy2 = platy2 + rand_range(-250, 250)
+	platy2 = rand_range(430, 700)
 	p.position.y = platy2
 	add_child(p)
-	if platy2 < -125:
-		time = rand_range(0.3, 0.8)
-	elif platy2 < 0:
+	if platy2 < 0:
 		time = rand_range(0.5, 1)
-	elif platy2 > 125:
-		time = rand_range(0.7, 1.2)
-	elif platy2 > 0:
-		time = rand_range(1, 1.5)
+	elif platy2 >= 0:
+		time = rand_range(0.8, 1.5)
+	#elif platy2 > 125:
+	#	time = rand_range(0.7, 1.2)
+	#elif platy2 > 0:
+	#	time = rand_range(1, 1.5)
 	yield(get_tree().create_timer(time),"timeout")
 	platform_spawn2()
 
