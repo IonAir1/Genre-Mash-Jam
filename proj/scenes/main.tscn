@@ -1,10 +1,22 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/paper.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scripts/main.gd" type="Script" id=3]
 
 [node name="main" type="Node2D"]
 script = ExtResource( 3 )
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
-position = Vector2( 1366.58, -170.357 )
+position = Vector2( 1376.66, -107.361 )
+
+[node name="paper" parent="." instance=ExtResource( 2 )]
+position = Vector2( 526.76, 377.176 )
+
+[node name="Node2D" type="StaticBody2D" parent="."]
+collision_layer = 4
+collision_mask = 2147483648
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Node2D"]
+position = Vector2( -1.5874, 3.1748 )
+polygon = PoolVector2Array( 0.338074, -0.851362, 1280.1, 0.293885, 1279.75, 720.75, -0.671265, 720.457, -0.0741234, 0.582956, -2.36768, 1.03123, -14.2709, 735.616, 1285.75, 733.934, 1302.57, -24.5542, -0.0313072, -3.7813 )

@@ -25,8 +25,6 @@ func platform_spawn():
 	elif platy > 0:
 		time = rand_range(1, 1.5)
 	yield(get_tree().create_timer(time),"timeout")
-
-
 	platform_spawn()
 
 func _ready():
