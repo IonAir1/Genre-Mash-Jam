@@ -79,4 +79,5 @@ position = Vector2( -862.381, -540.095 )
 scale = Vector2( 6.72993, 4.11659 )
 z_index = 100
 texture = ExtResource( 3 )
+
 [connection signal="pressed" from="Control/VBoxContainer/CenterContainer/Play" to="." method="_on_Play_pressed"]

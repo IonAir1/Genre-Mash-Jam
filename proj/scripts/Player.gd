@@ -62,6 +62,7 @@ func _on_detectdead_area_entered(area): #detect if player hit
 	else: #if still has lives
 
 		position.y = -80 #respawn
+		position.x = 640
 		global.shoot = 0
 		gravity = 0
 		velocity.y = 0
