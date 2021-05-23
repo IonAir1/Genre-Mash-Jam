@@ -8,6 +8,7 @@
 extents = Vector2( 23.9922, 23.9844 )
 
 [node name="Player" type="KinematicBody2D"]
+z_index = 5
 script = ExtResource( 2 )
 
 [node name="runner" type="Sprite" parent="."]
@@ -36,7 +37,7 @@ scale = Vector2( 0.0925463, 0.0925463 )
 texture = ExtResource( 3 )
 
 [node name="detectdead" type="Area2D" parent="."]
-collision_layer = 64
+collision_layer = 512
 collision_mask = 194
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="detectdead"]
