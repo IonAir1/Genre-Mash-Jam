@@ -1,12 +1,13 @@
 extends KinematicBody2D
 
 
-export (int) var speed = 1200
-export (int) var jump_speed = -1800
-export (int) var gravity = 4000
+var speed = 800
+var jump_speed = -1500
+var gravity = 4000
 var paper = preload("res://scenes/paper.tscn")
 var dead = 0
 var fade = 20
+var respawning = 0
 
 var velocity = Vector2.ZERO
 
@@ -40,15 +41,35 @@ func _physics_process(delta):
 	if Input.is_action_just_pressed("jump"):
 		if is_on_floor():
 			velocity.y = jump_speed
-	position.x -= global.speed
+	if respawning == 0:
+		position.x -= global.speed
 
 
 func _on_detectdead_area_entered(area):
-	if dead == 0:
+	if dead == 0 and global.lives == 0:
+		visible = false
 		dead = 1
 		yield(get_tree().create_timer(0.5), "timeout")
 		get_parent().get_node("fade").visible = true
 		fade()
+	else:
+		if area.name == "player wall":
+			position.y = -80
+			global.shoot = 0
+			gravity = 0
+			velocity.y = 0
+			respawning = 1
+			reset_grav()
+		global.lives -= 1
+		global.hurt = 1
+		yield(get_tree().create_timer(0.01), "timeout")
+		global.hurt = 0
+
+func reset_grav():
+	yield(get_tree().create_timer(4), "timeout")
+	gravity = 4000
+	global.shoot = 1
+	respawning = 0
 
 func fade():
 	yield(get_tree().create_timer(0.02), "timeout")

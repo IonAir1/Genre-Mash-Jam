@@ -6,6 +6,10 @@ func _physics_process(delta):
 	if position.x <= -50:
 		queue_free()
 
+func _process(delta):
+	if global.hurt == 1:
+		queue_free()
+
 
 func _on_bullet_area_entered(area):
-	pass # Replace with function body.
+	queue_free()

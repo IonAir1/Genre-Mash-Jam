@@ -10,12 +10,15 @@ func _ready():
 
 
 func bullet():
-	yield(get_tree().create_timer(rand_range(0.6, 1)), "timeout")
+	yield(get_tree().create_timer(rand_range(0.8, 2)), "timeout")
 	var b = bullet.instance()
 	b.position = position
 	get_parent().add_child(b)
 	bullet()
 
+func _process(delta):
+	if global.hurt == 1:
+		queue_free()
 
 func _on_detect_body_entered(body):
 	yield(get_tree().create_timer(0.01), "timeout")

@@ -7,7 +7,7 @@ var platy2 = 0
 var fade = 20
 
 func platform_spawn():
-	var time = rand_range(0.8, 2.5)
+	var time = rand_range(0.8, 2)
 
 	var p = platform.instance()
 	p.position.x = 1400
@@ -18,7 +18,7 @@ func platform_spawn():
 	platform_spawn()
 
 func platform_spawn2():
-	var time = rand_range(0.8, 2.5)
+	var time = rand_range(0.8, 2)
 
 	var p = platform.instance()
 	p.position.x = 1400
@@ -77,6 +77,22 @@ func _process(delta):
 	else:
 		$ghostplayer.visible = false
 	$score/score.text = "SCORE: " + str(global.score)
+	
+	if global.lives >= 3:
+		get_node("life/3a").visible = true
+	else:
+		get_node("life/3a").visible = false
+	if global.lives >= 2:
+		get_node("life/2a").visible = true
+	else:
+		get_node("life/2a").visible = false
+	if global.lives >= 1:
+		get_node("life/1a").visible = true
+	else:
+		get_node("life/1a").visible = false
+	
+	
+	
 
 func _physics_process(delta):
 	$ghostplayer.position.x = $Player.position.x
@@ -85,6 +101,7 @@ func _physics_process(delta):
 
 func _ready():
 	randomize()
+	global.lives = 3
 	$ghostplayer.position.y = -10
 	$fade.position = Vector2(641, 315)
 	global.enemy_count = 0
