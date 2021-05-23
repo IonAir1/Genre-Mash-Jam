@@ -5,6 +5,8 @@ export (int) var speed = 1200
 export (int) var jump_speed = -1800
 export (int) var gravity = 4000
 var paper = preload("res://scenes/paper.tscn")
+var dead = 0
+var fade = 20
 
 var velocity = Vector2.ZERO
 
@@ -42,5 +44,20 @@ func _physics_process(delta):
 
 
 func _on_detectdead_area_entered(area):
-	queue_free()
-	get_tree().quit()
+	if dead == 0:
+		dead = 1
+		yield(get_tree().create_timer(0.5), "timeout")
+		get_parent().get_node("fade").visible = true
+		fade()
+
+func fade():
+	yield(get_tree().create_timer(0.02), "timeout")
+	get_parent().get_node("fade").modulate.a += 0.05
+	fade -=1
+	if fade > 0:
+		fade()
+	else:
+		yield(get_tree().create_timer(0.5), "timeout")
+		queue_free()
+		get_tree().change_scene("res://scenes/main menu.tscn")
+

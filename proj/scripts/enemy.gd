@@ -3,13 +3,14 @@ extends KinematicBody2D
 var bullet = preload("res://scenes/bullet.tscn")
 
 func _ready():
-	for i in range(20):
+	for i in range(15):
 		position.x -= 10
+	yield(get_tree().create_timer(2), "timeout")
 	bullet()
 
 
 func bullet():
-	yield(get_tree().create_timer(rand_range(0.6, 2)), "timeout")
+	yield(get_tree().create_timer(rand_range(0.6, 1)), "timeout")
 	var b = bullet.instance()
 	b.position = position
 	get_parent().add_child(b)
@@ -21,4 +22,6 @@ func _on_detect_body_entered(body):
 	if body.name == "paper":
 		global.score += 1
 		global.enemy_count -= 1
+		var ypos = (position.y - 40) / 64
+		global.enemypos[ypos] = 0
 		queue_free()

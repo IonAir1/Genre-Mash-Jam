@@ -22,5 +22,5 @@ collision_mask = 8
 
 [node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="detect"]
 scale = Vector2( 1.2, 1.2 )
-polygon = PoolVector2Array( 35.9844, -36.0078, -35.9567, -0.0196636, 35.9844, 36 )
+polygon = PoolVector2Array( 35.9844, -36.0078, -2.17953, -16.9165, -36.1491, -15.8888, -35.4539, 16.0917, -1.5877, 17.1883, 35.9844, 36 )
 [connection signal="body_entered" from="detect" to="." method="_on_detect_body_entered"]

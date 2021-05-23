@@ -6,7 +6,7 @@ var velocity = Vector2(400, 400)
 func _ready():
 	velocity = get_parent().get_node("Player/rotate/displaced").global_position - get_parent().get_node("Player").global_position
 	velocity.normalized()
-	velocity = velocity*100
+	velocity = velocity*150
 	pass
 
 func _physics_process(delta):
