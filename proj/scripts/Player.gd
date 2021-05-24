@@ -63,7 +63,7 @@ func _on_detectdead_area_entered(area): #detect if player hit
 		fade() #fade out
 	else: #if still has lives
 		if area.name == "player wall":
-			position.y = -80 #respawn
+			position.y = -200 #respawn
 			position.x = 640
 			global.shoot = 0
 			gravity = 0

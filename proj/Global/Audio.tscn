@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=2]
 
-[ext_resource path="res://assets/sounds/Jump .wav" type="AudioStream" id=1]
+[ext_resource path="res://assets/sounds/Jump.wav" type="AudioStream" id=1]
 [ext_resource path="res://assets/sounds/hurt.wav" type="AudioStream" id=2]
 [ext_resource path="res://assets/sounds/enemy hit.wav" type="AudioStream" id=3]
 [ext_resource path="res://assets/sounds/Drop.wav" type="AudioStream" id=4]
@@ -32,6 +32,7 @@ stream = ExtResource( 2 )
 
 [node name="jump" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 1 )
+volume_db = -5.0
 
 [node name="pickup" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 8 )
