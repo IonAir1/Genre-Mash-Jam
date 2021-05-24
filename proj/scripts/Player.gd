@@ -22,7 +22,7 @@ func get_input():
 
 	if Input.is_action_just_pressed("shoot") and global.shoot >= 1: #shoot or throw ball
 		var p = paper.instance()
-		p.position = get_node("rotate/displaced2").global_position
+		p.position = get_node("rotate/displaced3").global_position
 		p.rotation = $rotate.rotation
 		get_parent().add_child(p)
 		global.shoot -= 1
