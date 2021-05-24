@@ -90,18 +90,7 @@ func _process(delta):
 	$score/score.text = "SCORE: " + str(global.score) #sets text of score label
 
 
-	if global.lives >= 3: #code for showing health/lives
-		get_node("life/3a").visible = true
-	else:
-		get_node("life/3a").visible = false
-	if global.lives >= 2:
-		get_node("life/2a").visible = true
-	else:
-		get_node("life/2a").visible = false
-	if global.lives >= 1:
-		get_node("life/1a").visible = true
-	else:
-		get_node("life/1a").visible = false
+	$health.value = global.lives + 1 #sets value of healthbar
 
 func _physics_process(delta):
 	$ghostplayer.position.x = $Player.position.x #moves and scales out of bound player indicator
@@ -110,7 +99,7 @@ func _physics_process(delta):
 
 func _ready():
 	randomize() #randomizes things
-	global.lives = 3 #setups / resets global variables
+	global.lives = 100 #setups / resets global variables
 	$ghostplayer.position.y = -10
 	$fade.position = Vector2(641, 315)
 	global.enemy_count = 0

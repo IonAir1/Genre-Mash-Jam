@@ -9,7 +9,7 @@ func _ready():
 	bullet() #start shooting bullets
 
 func bullet():
-	yield(get_tree().create_timer(rand_range(0.8, 2)), "timeout") #spawn bullets
+	yield(get_tree().create_timer(rand_range(0.1, 3)), "timeout") #spawn bullets
 	var b = bullet.instance()
 	b.position = position
 	get_parent().add_child(b)

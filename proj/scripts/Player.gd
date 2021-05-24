@@ -53,23 +53,24 @@ func jump(): #code for jumping
 				velocity.y += jump_speed_var/2
 
 func _on_detectdead_area_entered(area): #detect if player hit
-	if dead == 0 and global.lives == 0: #if no more lives
+	if dead == 0 and global.lives <= 0: #if no more lives
 		visible = false
 		dead = 1
 		yield(get_tree().create_timer(0.5), "timeout")
 		get_parent().get_node("fade").visible = true
 		fade() #fade out
 	else: #if still has lives
-
-		position.y = -80 #respawn
-		position.x = 640
-		global.shoot = 0
-		gravity = 0
-		velocity.y = 0
-		respawning = 1
+		if area.name == "player wall":
+			position.y = -80 #respawn
+			position.x = 640
+			global.shoot = 0
+			gravity = 0
+			velocity.y = 0
+			respawning = 1
+			global.lives -= 10
+			global.hurt = 1
 		reset_grav()
-		global.lives -= 1
-		global.hurt = 1
+		global.lives -= 10
 		yield(get_tree().create_timer(0.01), "timeout")
 		global.hurt = 0
 

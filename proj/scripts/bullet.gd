@@ -1,6 +1,6 @@
 extends Node2D
 
-var speed = 40 #bullet speed
+var speed = 20 #bullet speed
 
 func _physics_process(delta):
 	position.x -= speed #moves bullet
