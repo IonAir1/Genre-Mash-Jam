@@ -3,7 +3,7 @@ extends KinematicBody2D
 
 var speed = 600 #player speed
 var jump_speed_normal = -1000 #-1500 #player initial jump height
-var jump_speed_var = -60 #added jump for variable jump
+var jump_speed_var = -50 #added jump for variable jump
 var gravity = 4000 #gravity
 var paper = preload("res://scenes/paper.tscn") #ball scene,paper anf ball are same
 var dead = 0 #lost game
