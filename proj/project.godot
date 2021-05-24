@@ -80,6 +80,7 @@ drop={
 2d_physics/layer_9="killball"
 2d_physics/layer_10="playerdetect"
 2d_physics/layer_11="platformdetect"
+2d_physics/layer_12="playerbarrier"
 
 [rendering]
 

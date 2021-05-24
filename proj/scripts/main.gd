@@ -5,6 +5,7 @@ var enemy = preload("res://scenes/enemy.tscn") #enemy scene
 var platy = 0 #upper platform grid position
 var platy2 = 0 #lower platform grid position
 var fade = 20 #fade timer
+var enemy2 = preload("res://scenes/enemy2.tscn")
 
 func platform_spawn():#platform spawner for platforms on the upper half of screen
 	var time = rand_range(0.8, 2) #timing of platform spawn
@@ -44,39 +45,46 @@ func enemy_spawn(): #enemy spawner
 		time = 2;.8
 	yield(get_tree().create_timer(time),"timeout")
 
-
-	var e = enemy.instance() #sets up and spawns enemy
-	e.position.x = 1400
-	var ypos
-	ypos = (randi()%11)
-	while global.enemypos[ypos] == 1:
-		ypos = (randi()%11)
-	e.position.y = (ypos * 64) + 48
-	if global.enemy_count < 8:
-		global.enemy_count += 1
-		global.enemypos[ypos] = 1
+	if randi()%3 == 2:
+		var e = enemy2.instance()
+		e.position.x = 1400
+		e.position.y = global.playerpos.y
 		add_child(e)
 
+	else:
+		var e = enemy.instance() #sets up and spawns enemy
+		e.position.x = 1400
+		var ypos
+		ypos = (randi()%11)
+		while global.enemypos[ypos] == 1:
+			ypos = (randi()%11)
+		e.position.y = (ypos * 64) + 48
+		if global.enemy_count < 8:
+			global.enemy_count += 1
+			global.enemypos[ypos] = 1
+			add_child(e)
 
-		if global.enemy_count < 7:
-			if randi()%4 == 0: #25% chance of enemy formation
-				
-				var e1 = enemy.instance() #spawns new enemy above orig enemy
-				e1.position.x = 1400
-				e1.position.y = e.position.y - 64
-				if e1.position.y > 0:
-					if global.enemypos[ypos-1] == 0: #checks if there is already enemy in place
-						global.enemy_count += 1
-						add_child(e1)
+
+			if global.enemy_count < 7:
+				if randi()%4 == 0: #25% chance of enemy formation
+					
+					var e1 = enemy.instance() #spawns new enemy above orig enemy
+					e1.position.x = 1400
+					e1.position.y = e.position.y - 64
+					if e1.position.y > 0:
+						if global.enemypos[ypos-1] == 0: #checks if there is already enemy in place
+							global.enemy_count += 1
+							add_child(e1)
 
 
-				var e2 = enemy.instance() #spawns new enemy below orig enemy
-				e2.position.x = 1400
-				e2.position.y = e.position.y + 64
-				if e2.position.y < 724:
-					if global.enemypos[ypos+1] == 0: #checks if there is already enemy in place
-						add_child(e2)
-						global.enemy_count += 1
+					var e2 = enemy.instance() #spawns new enemy below orig enemy
+					e2.position.x = 1400
+					e2.position.y = e.position.y + 64
+					if e2.position.y < 724:
+						if global.enemypos[ypos+1] == 0: #checks if there is already enemy in place
+							add_child(e2)
+							global.enemy_count += 1
+
 	enemy_spawn()
 
 func _process(delta):

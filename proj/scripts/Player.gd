@@ -81,6 +81,9 @@ func _on_detectdead_area_entered(area): #detect if player hit
 		global.hurt = 0
 
 func _process(delta):
+	global.playerpos = position
+
+
 	if global.shoot == 1: #code for handling player holding the ball
 		$ball.visible = true
 		$ball2.visible = false
@@ -107,4 +110,6 @@ func fade(): #fade out
 		yield(get_tree().create_timer(0.5), "timeout")
 		queue_free()
 		get_tree().change_scene("res://scenes/main menu.tscn") #back to main menu
+
+
 
