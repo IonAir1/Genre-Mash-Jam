@@ -9,3 +9,4 @@ var enemypos = [0, 0, 0, 0, 0, 0, 0 , 0, 0, 0, 0] #enemy grid positions availabl
 var lives = 3 #lives
 var hurt = 0 #is player respawning
 var shake = 0
+var enemysound = 0

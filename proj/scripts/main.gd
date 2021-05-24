@@ -106,6 +106,7 @@ func _ready():
 	global.score = 0
 	global.shoot = 1
 	global.enemypos = [0,0,0,0,0,0,0,0,0,0,0]
+	global.enemysound = 0
 	enemy_spawn() #initiates spawner codes
 	platform_spawn()
 	platform_spawn2()

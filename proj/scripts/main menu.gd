@@ -34,6 +34,7 @@ func fade_in(): #fade in code
 
 func _on_Play_pressed(): #play button code
 	if play == 0:
+		audio.get_node("click").play()
 		play = 1
 		fade = 20 #setup fade out
 		$fade.visible = true

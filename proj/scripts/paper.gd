@@ -13,10 +13,12 @@ func _physics_process(delta):
 	var collision_info = move_and_collide(velocity * delta) #movement of ball
 	if collision_info:
 		global.shake = 2
+		audio.get_node("bounce").play()
 		velocity = velocity.bounce(collision_info.normal) #bouncing of ball
 
 func _on_playerdetect_body_entered(body):
 	global.shoot += 1
+	audio.get_node("pickup").play()
 	queue_free() #despawn ball when picked up by player
 	pass
 
@@ -27,3 +29,5 @@ func _on_killballdetect_area_entered(area):
 func _process(delta):
 	if global.hurt == 1:
 		queue_free() #despawns ball when player dies
+
+

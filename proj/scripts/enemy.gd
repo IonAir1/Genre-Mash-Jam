@@ -22,6 +22,11 @@ func _process(delta):
 func _on_detect_body_entered(body): #despawn when hit by ball
 	yield(get_tree().create_timer(0.01), "timeout")
 	if body.name == "paper":
+		if global.enemysound == 0:
+			global.enemysound = 1
+			audio.get_node("enemyhit").play()
+			yield(get_tree().create_timer(0.3), "timeout")
+			global.enemysound = 0
 		global.score += 1
 		global.enemy_count -= 1
 		var ypos = (position.y - 40) / 64

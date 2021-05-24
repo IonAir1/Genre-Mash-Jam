@@ -4,7 +4,7 @@
 [ext_resource path="res://scripts/paper.gd" type="Script" id=2]
 
 [sub_resource type="CircleShape2D" id=1]
-radius = 50.9999
+radius = 55.1915
 
 [sub_resource type="CircleShape2D" id=2]
 radius = 67.448

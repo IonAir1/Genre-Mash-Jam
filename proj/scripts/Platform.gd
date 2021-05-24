@@ -9,6 +9,7 @@ func _physics_process(delta):
 		queue_free() #despawn when outside screen
 		
 	if Input.is_action_pressed("drop") and player == 1: #code for player to drop
+		#audio.get_node("drop").play()
 		$collision.disabled = true
 	else:
 		$collision.disabled = false

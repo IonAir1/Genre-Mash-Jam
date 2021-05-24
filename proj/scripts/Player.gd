@@ -42,6 +42,7 @@ func _physics_process(delta):
 func jump(): #code for jumping
 	if Input.is_action_pressed("jump"):
 		if is_on_floor(): #initial jump
+			audio.get_node("jump").play()
 			jump = 0
 			velocity.y += jump_speed_normal
 		else: #added jump
@@ -70,8 +71,10 @@ func _on_detectdead_area_entered(area): #detect if player hit
 			respawning = 1
 			global.lives -= 10
 			global.hurt = 1
+			audio.get_node("fall").play()
 		else:
 			global.shake = 1
+			audio.get_node("hurt").play()
 		reset_grav()
 		global.lives -= 10
 		yield(get_tree().create_timer(0.01), "timeout")

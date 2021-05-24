@@ -22,17 +22,17 @@ __meta__ = {
 
 [node name="score" type="Node2D" parent="."]
 modulate = Color( 1, 1, 1, 0.556863 )
-position = Vector2( 848.623, 620.038 )
+position = Vector2( 1274.14, 614.044 )
 z_index = 101
 __meta__ = {
 "_edit_group_": true
 }
 
 [node name="score" type="Label" parent="score"]
-margin_right = 380.0
-margin_bottom = 86.0
+grow_horizontal = 0
 custom_fonts/font = SubResource( 1 )
 text = "SCORE: 999"
+align = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
