@@ -45,12 +45,13 @@ func jump(): #code for jumping
 			jump = 0
 			velocity.y += jump_speed_normal
 		else: #added jump
-			if jump <= 10:
-				jump += 1
-				velocity.y += jump_speed_var
-			if jump > 10 and jump <= 20:
-				jump + 1
-				velocity.y += jump_speed_var/2
+			if respawning == 0:
+				if jump <= 10:
+					jump += 1
+					velocity.y += jump_speed_var
+				if jump > 10 and jump <= 20:
+					jump + 1
+					velocity.y += jump_speed_var/2
 
 func _on_detectdead_area_entered(area): #detect if player hit
 	if dead == 0 and global.lives <= 0: #if no more lives
@@ -69,6 +70,8 @@ func _on_detectdead_area_entered(area): #detect if player hit
 			respawning = 1
 			global.lives -= 10
 			global.hurt = 1
+		else:
+			global.shake = 1
 		reset_grav()
 		global.lives -= 10
 		yield(get_tree().create_timer(0.01), "timeout")

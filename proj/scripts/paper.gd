@@ -12,6 +12,7 @@ func _ready():
 func _physics_process(delta):
 	var collision_info = move_and_collide(velocity * delta) #movement of ball
 	if collision_info:
+		global.shake = 2
 		velocity = velocity.bounce(collision_info.normal) #bouncing of ball
 
 func _on_playerdetect_body_entered(body):

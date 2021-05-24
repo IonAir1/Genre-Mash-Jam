@@ -8,3 +8,4 @@ var highscore = 0 #highscore
 var enemypos = [0, 0, 0, 0, 0, 0, 0 , 0, 0, 0, 0] #enemy grid positions available
 var lives = 3 #lives
 var hurt = 0 #is player respawning
+var shake = 0
