@@ -76,6 +76,7 @@ func _on_detectdead_area_entered(area): #detect if player hit
 			global.shake = 1
 			audio.get_node("hurt").play()
 		reset_grav()
+		global.multiplier = 1
 		global.lives -= 10
 		yield(get_tree().create_timer(0.01), "timeout")
 		global.hurt = 0

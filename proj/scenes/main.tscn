@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/pixelated.ttf" type="DynamicFontData" id=2]
@@ -13,6 +13,10 @@
 size = 96
 font_data = ExtResource( 2 )
 
+[sub_resource type="DynamicFont" id=2]
+size = 64
+font_data = ExtResource( 2 )
+
 [node name="main" type="Node2D"]
 script = ExtResource( 3 )
 __meta__ = {
@@ -22,7 +26,7 @@ __meta__ = {
 
 [node name="score" type="Node2D" parent="."]
 modulate = Color( 1, 1, 1, 0.556863 )
-position = Vector2( 1274.14, 614.044 )
+position = Vector2( 1274.14, 611.8 )
 z_index = 101
 __meta__ = {
 "_edit_group_": true
@@ -83,7 +87,7 @@ z_index = 200
 texture = ExtResource( 4 )
 
 [node name="health" type="TextureProgress" parent="."]
-modulate = Color( 1, 1, 1, 0.6 )
+modulate = Color( 1, 1, 1, 0.556863 )
 margin_left = 13.6607
 margin_top = 641.921
 margin_right = 141.661
@@ -106,3 +110,17 @@ collision_layer = 2048
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
 polygon = PoolVector2Array( 0.5625, 0.207863, 6.18201, -273.594, 1271.93, -265.67, 1285.27, -97.7545, 1303.57, -169.188, 1290.18, -284.718, -22.4084, -297.139, -36.1268, 0.707596 )
+
+[node name="mp" type="Label" parent="."]
+modulate = Color( 1, 1, 1, 0.556863 )
+margin_left = 602.246
+margin_top = 630.194
+margin_right = 770.246
+margin_bottom = 702.194
+custom_fonts/font = SubResource( 2 )
+text = "1024x"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}

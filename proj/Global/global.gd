@@ -11,3 +11,5 @@ var hurt = 0 #is player respawning
 var shake = 0
 var enemysound = 0
 var playerpos = Vector2(0, 0)
+var multiplier = 0
+var mpupdate = 0

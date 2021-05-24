@@ -6,6 +6,9 @@ var platy = 0 #upper platform grid position
 var platy2 = 0 #lower platform grid position
 var fade = 20 #fade timer
 var enemy2 = preload("res://scenes/enemy2.tscn")
+var mptime = 0
+var mpcount = 0
+var timerlimit = 5
 
 func platform_spawn():#platform spawner for platforms on the upper half of screen
 	var time = rand_range(0.8, 2) #timing of platform spawn
@@ -93,12 +96,44 @@ func _process(delta):
 	else:
 		$ghostplayer.visible = false
 
-
-
 	$score/score.text = "SCORE: " + str(global.score) #sets text of score label
 
-
 	$health.value = global.lives + 1 #sets value of healthbar
+
+	if global.multiplier > 1:
+		$mp.visible = true
+		$mp.text = str(global.multiplier) + "x"
+	else:
+		$mp.visible = false
+
+	if global.mpupdate >= 1:
+		global.mpupdate -= 1
+		if global.multiplier > 0.5:
+			mptime = 0
+		else:
+			mptime = 0
+			mpcount = 1
+		if global.multiplier > 1:
+			global.multiplier = global.multiplier + 5
+		else:
+			global.multiplier += 1
+
+	if global.hurt == 1:
+		mptime == 0
+		mpcount = 0
+	
+	
+
+func mptimer():
+	var time = 0.1
+	yield(get_tree().create_timer(time), "timeout")
+	if mpcount == 1:
+		mptime += time
+		if mptime >= timerlimit:
+			mptime = 0
+			mpcount = 0
+			global.multiplier = 0
+	mptimer()
 
 func _physics_process(delta):
 	$ghostplayer.position.x = $Player.position.x #moves and scales out of bound player indicator
@@ -115,9 +150,12 @@ func _ready():
 	global.shoot = 1
 	global.enemypos = [0,0,0,0,0,0,0,0,0,0,0]
 	global.enemysound = 0
+	global.multiplier = 0
+	global.mpupdate = 0
 	enemy_spawn() #initiates spawner codes
 	platform_spawn()
 	platform_spawn2()
+	mptimer()
 	yield(get_tree().create_timer(0.5), "timeout")
 	fade()
 

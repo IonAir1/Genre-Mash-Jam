@@ -1,6 +1,7 @@
 extends KinematicBody2D
 
 var bullet = preload("res://scenes/bullet.tscn") #bullet scene
+var mp = preload("res://scenes/multiplier.tscn")
 
 func _ready():
 	for i in range(15): #move enemy on screen from side
@@ -22,10 +23,20 @@ func _process(delta):
 func _on_detect_body_entered(body): #despawn when hit by ball
 	if body.name == "paper":
 		play()
-		global.score += 1
+		if global.multiplier > 0.5:
+			global.score += global.multiplier
+		else:
+			global.score += 1
 		global.enemy_count -= 1
 		var ypos = (position.y - 40) / 64
 		global.enemypos[ypos] = 0
+		global.mpupdate += 1
+		yield(get_tree().create_timer(0.05), "timeout")
+
+		var m = mp.instance()
+		m.position = position
+		get_parent().add_child(m)
+
 		queue_free()
 
 func play():
