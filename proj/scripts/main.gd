@@ -113,8 +113,10 @@ func _process(delta):
 		else:
 			mptime = 0
 			mpcount = 1
-		if global.multiplier > 1:
+		if global.multiplier >= 5:
 			global.multiplier = global.multiplier + 5
+		elif global.multiplier > 1:
+			global.multiplier = 5
 		else:
 			global.multiplier += 1
 

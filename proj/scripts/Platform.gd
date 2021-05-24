@@ -5,7 +5,7 @@ var player = 0 #is player standing on the platform
 
 func _physics_process(delta):
 	position.x -= global.speed #moves platform towards left
-	if position.x < -100:
+	if position.x < -200:
 		queue_free() #despawn when outside screen
 		
 	if Input.is_action_pressed("drop") and player == 1: #code for player to drop
