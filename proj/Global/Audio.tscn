@@ -46,3 +46,6 @@ stream = ExtResource( 11 )
 
 [node name="music1" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 9 )
+
+[connection signal="finished" from="music0" to="." method="_on_music0_finished"]
+[connection signal="finished" from="music1" to="." method="_on_music1_finished"]
