@@ -38,14 +38,14 @@ func platform_spawn2(): #platform spawner for platforms on the lower half of scr
 
 func enemy_spawn(): #enemy spawner
 	var time #sets timing of platform
-	if global.score < 10:
-		time = 8 - (global.score/4)
-	elif global.score >=10 and global.score < 20:
-		time = 6.5 - ((global.score-9)/6)
-	elif global.score >= 20 and global.score < 39:
-		time = 4.8 - ((global.score - 19) / 10)
+	if global.score < 50:
+		time = 8 - (global.score/20)
+	elif global.score >=50 and global.score < 150:
+		time = 6.5 - ((global.score-50)/60)
+	elif global.score >= 150 and global.score <= 250:
+		time = 4 - ((global.score - 150) / 167)
 	else:
-		time = 2;.8
+		time = 2.5
 	yield(get_tree().create_timer(time),"timeout")
 
 	if randi()%3 == 2:

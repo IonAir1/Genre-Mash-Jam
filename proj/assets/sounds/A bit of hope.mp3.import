@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/A bit of hope.mp3-0eb4c528b2d5dfd393ecd77e08c99327.mp3str"
+
+[deps]
+
+source_file="res://assets/sounds/A bit of hope.mp3"
+dest_files=[ "res://.import/A bit of hope.mp3-0eb4c528b2d5dfd393ecd77e08c99327.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0
