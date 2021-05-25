@@ -28,7 +28,7 @@ audio="*res://Global/Audio.tscn"
 window/size/width=1280
 window/size/height=720
 window/stretch/mode="viewport"
-window/stretch/aspect="expand"
+window/stretch/aspect="keep"
 
 [input]
 

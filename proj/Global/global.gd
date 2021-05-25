@@ -13,3 +13,5 @@ var enemysound = 0
 var playerpos = Vector2(0, 0)
 var multiplier = 0
 var mpupdate = 0
+var sound = true
+var music = true
