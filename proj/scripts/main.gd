@@ -156,7 +156,10 @@ func _ready():
 	global.multiplier = 0
 	global.mpupdate = 0
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
-	if not global.tutorial:
+	if global.tutorial:
+		global.tutorial = false
+		global.tutolevel = 0
+	else:
 		enemy_spawn() #initiates spawner codes
 	platform_spawn()
 	platform_spawn2()
