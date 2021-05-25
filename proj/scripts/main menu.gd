@@ -13,6 +13,7 @@ func _ready():
 
 	$fade.position = Vector2(660, 330) #setup fade in code
 	fade_in()
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
 func fade_out(scene): #fade out code
 	yield(get_tree().create_timer(0.02), "timeout")
@@ -41,13 +42,11 @@ func _on_Play_pressed(): #play button code
 		$fade.visible = true
 		fade_out("res://scenes/main.tscn")
 
-
 func _on_sound_pressed():
 	if global.sound:
 		global.sound = false
 	else:
 		global.sound = true
-
 
 func _on_music_pressed():
 	if global.music:
@@ -64,7 +63,6 @@ func _process(delta):
 		$Control/music.modulate.a = 1
 	else:
 		$Control/music.modulate.a = 0.3
-
 
 func _on_Credits_pressed():
 	if credits == 0:

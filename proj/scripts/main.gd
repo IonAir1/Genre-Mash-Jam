@@ -138,6 +138,7 @@ func mptimer():
 	mptimer()
 
 func _physics_process(delta):
+	$cursor.position = get_global_mouse_position()
 	$ghostplayer.position.x = $Player.position.x #moves and scales out of bound player indicator
 	$ghostplayer.scale.y = 1 + ($Player.position.y / 600)
 	$ghostplayer.scale.x = 1 + ($Player.position.y / 600)
@@ -154,7 +155,9 @@ func _ready():
 	global.enemysound = 0
 	global.multiplier = 0
 	global.mpupdate = 0
-	enemy_spawn() #initiates spawner codes
+	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+	if not global.tutorial:
+		enemy_spawn() #initiates spawner codes
 	platform_spawn()
 	platform_spawn2()
 	mptimer()
