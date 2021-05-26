@@ -19,6 +19,12 @@ func _physics_process(delta):
 func _on_playerdetect_body_entered(body):
 	global.shoot += 1
 	audio.get_node("pickup").play()
+	
+	if global.tutolevel == 2:
+		global.tutolevel = -1
+		global.tutorial = false
+		global.spawn = true
+	
 	queue_free() #despawn ball when picked up by player
 	pass
 
@@ -27,7 +33,7 @@ func _on_killballdetect_area_entered(area):
 	queue_free()  #despawn ball when it goes out of bounds
 
 func _process(delta):
-	if global.hurt == 1:
+	if global.hurt == 1 and not global.tutorial:
 		queue_free() #despawns ball when player dies
 
 

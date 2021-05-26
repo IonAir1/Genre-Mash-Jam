@@ -65,11 +65,13 @@ func _on_detectdead_area_entered(area): #detect if player hit
 		if area.name == "player wall":
 			position.y = -200 #respawn
 			position.x = 640
-			global.shoot = 0
+
 			gravity = 0
 			velocity.y = 0
 			respawning = 1
-			global.lives -= 10
+			if not global.tutorial:
+				global.lives -= 10
+				global.shoot = 0
 			global.hurt = 1
 			audio.get_node("fall").play()
 		else:
@@ -77,7 +79,8 @@ func _on_detectdead_area_entered(area): #detect if player hit
 			audio.get_node("hurt").play()
 		reset_grav()
 		global.multiplier = 0
-		global.lives -= 10
+		if not global.tutorial:
+			global.lives -= 10
 		yield(get_tree().create_timer(0.01), "timeout")
 		global.hurt = 0
 
@@ -98,7 +101,8 @@ func _process(delta):
 func reset_grav(): #after respawning, gravity must reset
 	yield(get_tree().create_timer(4), "timeout")
 	gravity = 4000
-	global.shoot = 1
+	if not global.tutorial:
+		global.shoot = 1
 	respawning = 0
 
 func fade(): #fade out

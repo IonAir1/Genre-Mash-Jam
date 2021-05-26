@@ -38,7 +38,7 @@ func platform_spawn2(): #platform spawner for platforms on the lower half of scr
 
 func enemy_spawn(): #enemy spawner
 	var time #sets timing of platform
-	if global.score < 50:
+	if global.score < 50 and not global.tutorial:
 		time = 8 - (global.score/20)
 	elif global.score >=50 and global.score < 150:
 		time = 6.5 - ((global.score-50)/60)
@@ -48,7 +48,7 @@ func enemy_spawn(): #enemy spawner
 		time = 2.5
 	yield(get_tree().create_timer(time),"timeout")
 
-	if randi()%3 == 2:
+	if randi()%3 == 2 and not global.tutorial:
 		var e = enemy2.instance()
 		e.position.x = 1400
 		e.position.y = global.playerpos.y
@@ -68,7 +68,7 @@ func enemy_spawn(): #enemy spawner
 			add_child(e)
 
 
-			if global.enemy_count < 7:
+			if global.enemy_count < 7 and not global.tutorial:
 				if randi()%4 == 0: #25% chance of enemy formation
 					
 					var e1 = enemy.instance() #spawns new enemy above orig enemy
@@ -87,10 +87,31 @@ func enemy_spawn(): #enemy spawner
 						if global.enemypos[ypos+1] == 0: #checks if there is already enemy in place
 							add_child(e2)
 							global.enemy_count += 1
-
-	enemy_spawn()
+	
+	if not global.tutorial:
+		enemy_spawn()
 
 func _process(delta):
+	
+	if global.spawn:
+		global.spawn = false
+		enemy_spawn()
+		$score.visible = true
+		$health.visible = true
+	
+	if global.tutolevel == 0:
+		get_node("tutorial/0").visible = true
+	else:
+		get_node("tutorial/0").visible = false
+	if global.tutolevel == 1:
+		get_node("tutorial/1").visible = true
+	else:
+		get_node("tutorial/1").visible = false
+	if global.tutolevel == 2:
+		get_node("tutorial/2").visible = true
+	else:
+		get_node("tutorial/2").visible = false
+	
 	if $Player.position.y <= -40: #code for hiding and showing out of bounds indicator
 		$ghostplayer.visible = true
 	else:
@@ -157,8 +178,10 @@ func _ready():
 	global.mpupdate = 0
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	if global.tutorial:
-		global.tutorial = false
 		global.tutolevel = 0
+		$score.visible = false
+		$health.visible = false
+		tuto1()
 	else:
 		enemy_spawn() #initiates spawner codes
 	platform_spawn()
@@ -175,3 +198,8 @@ func fade(): #code for fade in / scene transition
 		fade()
 	else:
 		$fade.visible = false
+
+func tuto1():
+	yield(get_tree().create_timer(10), "timeout")
+	global.tutolevel = 1
+	enemy_spawn()

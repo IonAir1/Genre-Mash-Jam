@@ -13,11 +13,12 @@ func bullet():
 	yield(get_tree().create_timer(rand_range(1.2, 3)), "timeout") #spawn bullets
 	var b = bullet.instance()
 	b.position = position
-	get_parent().add_child(b)
+	if not global.tutorial:
+		get_parent().add_child(b)
 	bullet()
 
 func _process(delta):
-	if global.hurt == 1: #despawn when player respawning
+	if global.hurt == 1 and not global.tutorial: #despawn when player respawning
 		queue_free()
 
 func _on_detect_body_entered(body): #despawn when hit by ball
@@ -36,6 +37,9 @@ func _on_detect_body_entered(body): #despawn when hit by ball
 		var m = mp.instance()
 		m.position = position
 		get_parent().add_child(m)
+
+		if global.tutorial:
+			global.tutolevel = 2
 
 		queue_free()
 

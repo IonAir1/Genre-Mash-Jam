@@ -15,5 +15,6 @@ var multiplier = 0
 var mpupdate = 0
 var sound = true
 var music = true
-var tutorial = false
+var tutorial = true
 var tutolevel = -1
+var spawn = false
