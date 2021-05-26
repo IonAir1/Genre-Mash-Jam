@@ -141,6 +141,7 @@ texture = ExtResource( 9 )
 
 [node name="tutorial" type="Node2D" parent="."]
 modulate = Color( 1, 1, 1, 0.752941 )
+z_index = 50
 
 [node name="2" type="Sprite" parent="tutorial"]
 visible = false
