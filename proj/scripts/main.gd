@@ -4,7 +4,6 @@ var platform = preload("res://scenes/Platform.tscn") #platform scene
 var enemy = preload("res://scenes/enemy.tscn") #enemy scene
 var platy = 0 #upper platform grid position
 var platy2 = 0 #lower platform grid position
-var fade = 20 #fade timer
 var enemy2 = preload("res://scenes/enemy2.tscn") #2nd enemy scene
 var mptime = 0 #timer for multiplier
 var mpcount = false #should mpcount start counting
@@ -171,7 +170,6 @@ func _ready():
 	randomize() #randomizes things
 	global.lives = 100 #setups / resets global variables
 	$ghostplayer.position.y = -10
-	$fade.position = Vector2(641, 315)
 	global.enemy_count = 0
 	global.score = 0
 	global.shoot = 1
@@ -190,17 +188,6 @@ func _ready():
 	platform_spawn()
 	platform_spawn2()
 	mptimer()
-	yield(get_tree().create_timer(0.5), "timeout")
-	fade()
-
-func fade(): #code for fade in / scene transition
-	yield(get_tree().create_timer(0.02), "timeout")
-	$fade.modulate.a -= 0.05
-	fade -=1
-	if fade > 0:
-		fade()
-	else:
-		$fade.visible = false
 
 func tuto1(): #activates 2nd stage of tutorial
 	yield(get_tree().create_timer(10), "timeout")

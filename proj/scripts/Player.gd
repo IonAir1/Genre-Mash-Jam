@@ -7,7 +7,6 @@ var jump_speed_var = -50 #added jump for variable jump
 var gravity = 4000 #gravity
 var paper = preload("res://scenes/paper.tscn") #ball scene (paper and ball are same)
 var dead = 0 #lost game
-var fade = 20 #fade in and out / scene transition
 var respawning = 0 #is player respawning
 var jump = 0 #player jump timer
 var velocity = Vector2.ZERO #velocity
@@ -21,11 +20,14 @@ func get_input():
 		velocity.x -= speed
 
 	if Input.is_action_just_pressed("shoot") and global.shoot >= 1: #shoot or throw ball
-		var p = paper.instance()
-		p.position = get_node("rotate/displaced3").global_position #to make it so ouse distance does not affect speed of ball
-		p.rotation = $rotate.rotation
-		get_parent().add_child(p)
-		global.shoot -= 1
+		if not (global.tutorial and respawning == 1):
+			var p = paper.instance()
+			p.position = get_node("rotate/displaced3").global_position #to make it so ouse distance does not affect speed of ball
+			p.rotation = $rotate.rotation
+			get_parent().add_child(p)
+			global.shoot -= 1
+
+
 
 func _physics_process(delta):
 	$rotate.look_at(get_global_mouse_position()) #rotates 'rotate' node to cursor for aiming
@@ -58,9 +60,7 @@ func _on_detectdead_area_entered(area): #detect if player hit
 	if dead == 0 and global.lives <= 0: #if no more lives
 		visible = false
 		dead = 1
-		yield(get_tree().create_timer(0.5), "timeout")
-		get_parent().get_node("fade").visible = true
-		fade() #fade out
+		get_tree().change_scene("res://scenes/main menu.tscn")
 	else: #if still has lives
 		if area.name == "player wall": #if died because of player wall
 			position.y = -200 #respawn
@@ -103,17 +103,3 @@ func reset_grav(): #after respawning, gravity must reset
 	if not global.tutorial:
 		global.shoot = 1
 	respawning = 0
-
-func fade(): #fade out
-	yield(get_tree().create_timer(0.02), "timeout")
-	get_parent().get_node("fade").modulate.a += 0.05
-	fade -=1
-	if fade > 0:
-		fade()
-	else:
-		yield(get_tree().create_timer(0.5), "timeout")
-		queue_free()
-		get_tree().change_scene("res://scenes/main menu.tscn") #back to main menu
-
-
-
