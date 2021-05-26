@@ -2,10 +2,7 @@
 
 [ext_resource path="res://assets/Pixelated.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://scripts/main menu.gd" type="Script" id=2]
-<<<<<<< HEAD
-=======
 [ext_resource path="res://assets/ground.png" type="Texture" id=3]
->>>>>>> master
 [ext_resource path="res://cover (1).png" type="Texture" id=4]
 
 [sub_resource type="DynamicFont" id=1]
@@ -165,10 +162,12 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="cover" type="Sprite" parent="."]
-position = Vector2( 947.201, 396.356 )
-z_index = -5
-texture = ExtResource( 4 )
+[node name="fade" type="Sprite" parent="."]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( -862.381, -540.095 )
+scale = Vector2( 6.72993, 4.11659 )
+z_index = 100
+texture = ExtResource( 3 )
 
 [node name="cover" type="Sprite" parent="."]
 position = Vector2( 947.201, 396.356 )
