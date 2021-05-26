@@ -1,6 +1,5 @@
 extends KinematicBody2D
 
-
 var velocity = Vector2(400, 400) #velocity of ball
 
 func _ready():
@@ -12,15 +11,15 @@ func _ready():
 func _physics_process(delta):
 	var collision_info = move_and_collide(velocity * delta) #movement of ball
 	if collision_info:
-		global.shake = 2
-		audio.get_node("bounce").play()
+		global.shake = 2 #screenshake
+		audio.get_node("bounce").play() #play bounce sound
 		velocity = velocity.bounce(collision_info.normal) #bouncing of ball
 
-func _on_playerdetect_body_entered(body):
+func _on_playerdetect_body_entered(body): #picked up by player
 	global.shoot += 1
-	audio.get_node("pickup").play()
+	audio.get_node("pickup").play() #play pickup sound
 	
-	if global.tutolevel == 2:
+	if global.tutolevel == 2: #finish tutorial
 		global.tutolevel = -1
 		global.tutorial = false
 		global.spawn = true

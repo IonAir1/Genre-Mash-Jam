@@ -5,12 +5,12 @@ var speed = 600 #player speed
 var jump_speed_normal = -1000 #-1500 #player initial jump height
 var jump_speed_var = -50 #added jump for variable jump
 var gravity = 4000 #gravity
-var paper = preload("res://scenes/paper.tscn") #ball scene,paper anf ball are same
+var paper = preload("res://scenes/paper.tscn") #ball scene (paper and ball are same)
 var dead = 0 #lost game
 var fade = 20 #fade in and out / scene transition
 var respawning = 0 #is player respawning
 var jump = 0 #player jump timer
-var velocity = Vector2.ZERO
+var velocity = Vector2.ZERO #velocity
 
 func get_input():
 	velocity.x = 0
@@ -22,7 +22,7 @@ func get_input():
 
 	if Input.is_action_just_pressed("shoot") and global.shoot >= 1: #shoot or throw ball
 		var p = paper.instance()
-		p.position = get_node("rotate/displaced3").global_position
+		p.position = get_node("rotate/displaced3").global_position #to make it so ouse distance does not affect speed of ball
 		p.rotation = $rotate.rotation
 		get_parent().add_child(p)
 		global.shoot -= 1
@@ -62,7 +62,7 @@ func _on_detectdead_area_entered(area): #detect if player hit
 		get_parent().get_node("fade").visible = true
 		fade() #fade out
 	else: #if still has lives
-		if area.name == "player wall":
+		if area.name == "player wall": #if died because of player wall
 			position.y = -200 #respawn
 			position.x = 640
 
@@ -74,7 +74,7 @@ func _on_detectdead_area_entered(area): #detect if player hit
 				global.shoot = 0
 			global.hurt = 1
 			audio.get_node("fall").play()
-		else:
+		else: #if died because of bullet or enemy type 2
 			global.shake = 1
 			audio.get_node("hurt").play()
 		reset_grav()
@@ -85,8 +85,7 @@ func _on_detectdead_area_entered(area): #detect if player hit
 		global.hurt = 0
 
 func _process(delta):
-	global.playerpos = position
-
+	global.playerpos = position #make player position known globally
 
 	if global.shoot == 1: #code for handling player holding the ball
 		$ball.visible = true

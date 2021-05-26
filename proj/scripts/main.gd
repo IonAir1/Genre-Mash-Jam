@@ -5,10 +5,10 @@ var enemy = preload("res://scenes/enemy.tscn") #enemy scene
 var platy = 0 #upper platform grid position
 var platy2 = 0 #lower platform grid position
 var fade = 20 #fade timer
-var enemy2 = preload("res://scenes/enemy2.tscn")
-var mptime = 0
-var mpcount = 0
-var timerlimit = 5
+var enemy2 = preload("res://scenes/enemy2.tscn") #2nd enemy scene
+var mptime = 0 #timer for multiplier
+var mpcount = false #should mpcount start counting
+var timerlimit = 5 #multiplier time limit
 
 func platform_spawn():#platform spawner for platforms on the upper half of screen
 	var time = rand_range(0.8, 2) #timing of platform spawn
@@ -48,21 +48,22 @@ func enemy_spawn(): #enemy spawner
 		time = 2.5
 	yield(get_tree().create_timer(time),"timeout")
 
-	if randi()%3 == 2 and not global.tutorial:
-		var e = enemy2.instance()
+	if randi()%3 == 0 and not global.tutorial: #picking random enemy
+		var e = enemy2.instance() #enemy type 2
 		e.position.x = 1400
 		e.position.y = global.playerpos.y
 		add_child(e)
 
-	else:
+	else: #enemy type 1
 		var e = enemy.instance() #sets up and spawns enemy
 		e.position.x = 1400
 		var ypos
-		ypos = (randi()%11)
-		while global.enemypos[ypos] == 1:
-			ypos = (randi()%11)
+		ypos = (randi()%11) #random enemy y position
 		e.position.y = (ypos * 64) + 48
-		if global.enemy_count < 8:
+		if global.enemy_count < 8: #making sure there is still a place for enemy
+			while global.enemypos[ypos] == 1: #if y position is occpied then repick
+				ypos = (randi()%11)
+
 			global.enemy_count += 1
 			global.enemypos[ypos] = 1
 			add_child(e)
@@ -92,7 +93,44 @@ func enemy_spawn(): #enemy spawner
 		enemy_spawn()
 
 func _process(delta):
+	tutorial()
 	
+	if $Player.position.y <= -40: #code for hiding and showing out of bounds indicator
+		$ghostplayer.visible = true
+	else:
+		$ghostplayer.visible = false
+
+	$score/score.text = "SCORE: " + str(global.score) #sets text of score label
+	$health.value = global.lives + 1 #sets value of healthbar
+
+	if global.multiplier > 1: #code for showing mltiplier sprite
+		$mp.visible = true
+		$mp.text = str(global.multiplier) + "x"
+	else:
+		$mp.visible = false
+
+	multiplier()
+
+	if global.hurt == 1:
+		mptime == 0
+		mpcount = 0
+
+func multiplier(): #ccode for activating multiplier
+	if global.mpupdate >= 1:
+		global.mpupdate -= 1
+		if global.multiplier > 0.5:
+			mptime = 0
+		else:
+			mptime = 0
+			mpcount = true
+		if global.multiplier >= 5:
+			global.multiplier = global.multiplier + 5
+		elif global.multiplier > 1:
+			global.multiplier = 5
+		else:
+			global.multiplier += 1
+
+func tutorial(): #code for showing/hiding tutorial sprites
 	if global.spawn:
 		global.spawn = false
 		enemy_spawn()
@@ -111,50 +149,15 @@ func _process(delta):
 		get_node("tutorial/2").visible = true
 	else:
 		get_node("tutorial/2").visible = false
-	
-	if $Player.position.y <= -40: #code for hiding and showing out of bounds indicator
-		$ghostplayer.visible = true
-	else:
-		$ghostplayer.visible = false
 
-	$score/score.text = "SCORE: " + str(global.score) #sets text of score label
-
-	$health.value = global.lives + 1 #sets value of healthbar
-
-	if global.multiplier > 1:
-		$mp.visible = true
-		$mp.text = str(global.multiplier) + "x"
-	else:
-		$mp.visible = false
-
-	if global.mpupdate >= 1:
-		global.mpupdate -= 1
-		if global.multiplier > 0.5:
-			mptime = 0
-		else:
-			mptime = 0
-			mpcount = 1
-		if global.multiplier >= 5:
-			global.multiplier = global.multiplier + 5
-		elif global.multiplier > 1:
-			global.multiplier = 5
-		else:
-			global.multiplier += 1
-
-	if global.hurt == 1:
-		mptime == 0
-		mpcount = 0
-	
-	
-
-func mptimer():
+func mptimer(): #multiplier timer code
 	var time = 0.1
 	yield(get_tree().create_timer(time), "timeout")
-	if mpcount == 1:
+	if mpcount:
 		mptime += time
 		if mptime >= timerlimit:
 			mptime = 0
-			mpcount = 0
+			mpcount = false
 			global.multiplier = 0
 	mptimer()
 
@@ -177,7 +180,7 @@ func _ready():
 	global.multiplier = 0
 	global.mpupdate = 0
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
-	if global.tutorial:
+	if global.tutorial: #checks if it should be tutorial
 		global.tutolevel = 0
 		$score.visible = false
 		$health.visible = false
@@ -199,7 +202,7 @@ func fade(): #code for fade in / scene transition
 	else:
 		$fade.visible = false
 
-func tuto1():
+func tuto1(): #activates 2nd stage of tutorial
 	yield(get_tree().create_timer(10), "timeout")
 	global.tutolevel = 1
 	enemy_spawn()

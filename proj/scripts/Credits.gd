@@ -3,10 +3,10 @@ extends Control
 var fade = 20
 var click = 0
 
-func _on_LinkButton_pressed():
+func _on_LinkButton_pressed(): #open webpage when clicked
 	OS.shell_open("https://www.fesliyanstudios.com/")
 
-func _input(event):
+func _input(event): #go back to main menu when key press
 	if event is InputEventKey and event.pressed:
 		if event.scancode != KEY_ENTER:
 			if click == 0:

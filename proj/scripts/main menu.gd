@@ -2,7 +2,7 @@ extends Node2D
 
 var fade = 20 #fade timer
 var play = 0 #is play button pressed
-var credits = 0
+var credits = 0 #is credits button pressed
 
 func _ready():
 	if global.score > global.highscore: #set new highscore code
@@ -42,20 +42,20 @@ func _on_Play_pressed(): #play button code
 		$fade.visible = true
 		fade_out("res://scenes/main.tscn")
 
-func _on_sound_pressed():
+func _on_sound_pressed(): #sound button code
 	if global.sound:
 		global.sound = false
 	else:
 		global.sound = true
 
-func _on_music_pressed():
+func _on_music_pressed(): #music button code
 	if global.music:
 		global.music = false
 	else:
 		global.music = true
 
 func _process(delta):
-	if global.sound:
+	if global.sound: #highlghting music and sound button
 		$Control/sound.modulate.a = 1
 	else:
 		$Control/sound.modulate.a = 0.3

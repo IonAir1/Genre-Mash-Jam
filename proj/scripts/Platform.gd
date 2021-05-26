@@ -20,6 +20,5 @@ func _physics_process(delta):
 func _on_dropdetect_body_entered(body):
 	player = 1
 
-
 func _on_dropdetect_body_exited(body):
 	player = 0

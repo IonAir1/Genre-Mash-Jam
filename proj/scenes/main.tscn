@@ -93,7 +93,7 @@ texture = ExtResource( 5 )
 modulate = Color( 0, 0, 0, 1 )
 position = Vector2( -1113.62, -803.613 )
 scale = Vector2( 9.04091, 6.34397 )
-z_index = 200
+z_index = 601
 texture = ExtResource( 4 )
 
 [node name="health" type="TextureProgress" parent="."]

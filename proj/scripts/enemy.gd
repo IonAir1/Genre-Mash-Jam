@@ -1,15 +1,15 @@
 extends KinematicBody2D
 
 var bullet = preload("res://scenes/bullet.tscn") #bullet scene
-var mp = preload("res://scenes/multiplier.tscn")
+var mp = preload("res://scenes/multiplier.tscn") #multiplier scene
+var curr = 0
+var limit = 30
 
 func _ready():
-	for i in range(15): #move enemy on screen from side
-		position.x -= 10
 	yield(get_tree().create_timer(2), "timeout")
 	bullet() #start shooting bullets
 
-func bullet():
+func bullet(): #bullet spawn code
 	yield(get_tree().create_timer(rand_range(1.2, 3)), "timeout") #spawn bullets
 	var b = bullet.instance()
 	b.position = position
@@ -17,7 +17,10 @@ func bullet():
 		get_parent().add_child(b)
 	bullet()
 
-func _process(delta):
+func _process(delta): 
+	if curr < limit: #move enemy from side of screen
+		position.x -= 5
+		curr += 1
 	if global.hurt == 1 and not global.tutorial: #despawn when player respawning
 		queue_free()
 
@@ -43,7 +46,7 @@ func _on_detect_body_entered(body): #despawn when hit by ball
 
 		queue_free()
 
-func play():
+func play(): #play enemy sounds
 	if global.enemysound == 0:
 		global.enemysound = 1
 		audio.get_node("enemyhit").play()
