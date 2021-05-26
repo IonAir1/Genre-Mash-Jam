@@ -1,8 +1,9 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://assets/Pixelated.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://scripts/main menu.gd" type="Script" id=2]
 [ext_resource path="res://assets/ground.png" type="Texture" id=3]
+[ext_resource path="res://cover (1).png" type="Texture" id=4]
 
 [sub_resource type="DynamicFont" id=1]
 size = 100
@@ -10,7 +11,7 @@ extra_spacing_bottom = 60
 font_data = ExtResource( 1 )
 
 [sub_resource type="DynamicFont" id=2]
-size = 48
+size = 40
 extra_spacing_bottom = 20
 font_data = ExtResource( 1 )
 
@@ -35,6 +36,7 @@ font_data = ExtResource( 1 )
 
 [sub_resource type="DynamicFont" id=10]
 size = 48
+outline_color = Color( 0.94902, 0.94902, 0.94902, 0.94902 )
 font_data = ExtResource( 1 )
 
 [node name="main menu" type="Node2D"]
@@ -48,57 +50,50 @@ __meta__ = {
 }
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Control"]
-margin_left = 20.0
-margin_top = 20.0
-margin_right = 1260.0
-margin_bottom = 700.0
-alignment = 1
+margin_left = 40.0
+margin_top = 40.0
+margin_right = 1240.0
+margin_bottom = 680.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Title" type="Label" parent="Control/VBoxContainer"]
-margin_top = 44.0
-margin_right = 1240.0
-margin_bottom = 204.0
+margin_right = 1200.0
+margin_bottom = 160.0
 custom_fonts/font = SubResource( 1 )
 text = "Smash Dash"
-align = 1
 
 [node name="score" type="Label" parent="Control/VBoxContainer"]
-margin_top = 208.0
-margin_right = 1240.0
-margin_bottom = 276.0
+margin_top = 164.0
+margin_right = 1200.0
+margin_bottom = 224.0
 custom_fonts/font = SubResource( 2 )
 text = "Score:999"
-align = 1
 
 [node name="highscore" type="Label" parent="Control/VBoxContainer"]
-margin_top = 280.0
-margin_right = 1240.0
-margin_bottom = 348.0
+margin_top = 228.0
+margin_right = 1200.0
+margin_bottom = 288.0
 custom_fonts/font = SubResource( 2 )
-text = "Score:999"
-align = 1
+text = "High Score:999"
 
 [node name="seperator" type="Label" parent="Control/VBoxContainer"]
 modulate = Color( 1, 1, 1, 0 )
-margin_top = 352.0
-margin_right = 1240.0
-margin_bottom = 420.0
+margin_top = 292.0
+margin_right = 1200.0
+margin_bottom = 352.0
 custom_fonts/font = SubResource( 2 )
 text = "Score:999"
 align = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Control/VBoxContainer"]
-margin_top = 424.0
-margin_right = 1240.0
-margin_bottom = 528.0
-alignment = 1
+margin_top = 356.0
+margin_right = 1200.0
+margin_bottom = 460.0
 
 [node name="Play" type="Button" parent="Control/VBoxContainer/HBoxContainer"]
-margin_left = 492.0
-margin_right = 748.0
+margin_right = 256.0
 margin_bottom = 104.0
 size_flags_horizontal = 0
 custom_styles/hover = SubResource( 3 )
@@ -110,17 +105,15 @@ custom_fonts/font = SubResource( 8 )
 text = "PLAY"
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="Control/VBoxContainer"]
-margin_top = 532.0
-margin_right = 1240.0
-margin_bottom = 636.0
-alignment = 1
+margin_top = 464.0
+margin_right = 1200.0
+margin_bottom = 568.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Credits" type="Button" parent="Control/VBoxContainer/HBoxContainer2"]
-margin_left = 396.0
-margin_right = 844.0
+margin_right = 448.0
 margin_bottom = 104.0
 size_flags_horizontal = 0
 custom_styles/hover = SubResource( 3 )
@@ -132,10 +125,11 @@ custom_fonts/font = SubResource( 8 )
 text = "Credits"
 
 [node name="sound" type="Button" parent="Control"]
-margin_left = 20.0
-margin_top = 589.847
-margin_right = 260.0
-margin_bottom = 637.847
+modulate = Color( 0.94902, 0.94902, 0.94902, 1 )
+margin_left = 731.349
+margin_top = 632.0
+margin_right = 971.349
+margin_bottom = 680.0
 custom_styles/hover = SubResource( 3 )
 custom_styles/pressed = SubResource( 4 )
 custom_styles/focus = SubResource( 5 )
@@ -148,10 +142,14 @@ __meta__ = {
 }
 
 [node name="music" type="Button" parent="Control"]
-margin_left = 20.0
-margin_top = 653.326
-margin_right = 260.0
-margin_bottom = 701.326
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 1000.0
+margin_top = 632.0
+margin_right = 1240.0
+margin_bottom = 680.0
 custom_styles/hover = SubResource( 3 )
 custom_styles/pressed = SubResource( 4 )
 custom_styles/focus = SubResource( 5 )
@@ -159,6 +157,7 @@ custom_styles/disabled = SubResource( 6 )
 custom_styles/normal = SubResource( 7 )
 custom_fonts/font = SubResource( 10 )
 text = "Music"
+align = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -169,6 +168,11 @@ position = Vector2( -862.381, -540.095 )
 scale = Vector2( 6.72993, 4.11659 )
 z_index = 100
 texture = ExtResource( 3 )
+
+[node name="cover" type="Sprite" parent="."]
+position = Vector2( 947.201, 396.356 )
+z_index = -5
+texture = ExtResource( 4 )
 
 [connection signal="pressed" from="Control/VBoxContainer/HBoxContainer/Play" to="." method="_on_Play_pressed"]
 [connection signal="pressed" from="Control/VBoxContainer/HBoxContainer2/Credits" to="." method="_on_Credits_pressed"]
