@@ -14,13 +14,14 @@ var velocity = Vector2.ZERO #velocity
 
 func get_input():
 	velocity.x = 0
-	if Input.is_action_pressed("right"): #move right
+	if Input.is_action_pressed("right") or global.control.x == 1: #move right
 		velocity.x += speed
 
-	if Input.is_action_pressed("left"): #move left
+	if Input.is_action_pressed("left") or global.control.x == -1: #move left
 		velocity.x -= speed
 
-	if Input.is_action_just_pressed("shoot") and global.shoot >= 1: #shoot or throw ball
+	if (Input.is_action_just_pressed("shoot") or global.control.z==1) and global.shoot >= 1: #shoot or throw ball
+		global.control.z = 0
 		if not (global.tutorial and respawning == 1):
 			var p = paper.instance()
 			p.position = get_node("rotate/displaced3").global_position #to make it so ouse distance does not affect speed of ball
@@ -41,7 +42,7 @@ func _physics_process(delta):
 		position.x -= global.speed
 
 func jump(): #code for jumping
-	if Input.is_action_pressed("jump"):
+	if Input.is_action_pressed("jump") or global.control.y==1:
 		if is_on_floor(): #initial jump
 			audio.get_node("jump").play()
 			jump = 0
