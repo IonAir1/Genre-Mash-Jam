@@ -18,3 +18,4 @@ var music = true #is there music
 var tutorial = true #should tutorial start (true)
 var tutolevel = -1 #tutorial stage
 var spawn = false #should enemy spawn activate manually
+var control = Vector3(0, 0, 0)
